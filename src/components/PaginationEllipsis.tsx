@@ -1,6 +1,17 @@
+"use client";
 import Link from "next/link";
+import { usePathname, useSearchParams } from "next/navigation";
 
 export default function PaginationEllipsis({ totalPages, currentPage }: { totalPages: number; currentPage: number; }) {
+    const pathname = usePathname();
+    const searchParams = useSearchParams();
+
+    const createPageUrl = (pageNumber: number | string) => {
+        const params = new URLSearchParams(searchParams.toString());
+        params.set("page", pageNumber.toString());
+        return `${pathname}?${params.toString()}`;
+    };
+
     // Algoritmo matemático para calcular el rango de botones a mostrar
     const getPageNumbers = () => {
         const delta = 2; // Cuántos botones mostrar a la izquierda y derecha de la página actual
@@ -43,7 +54,7 @@ export default function PaginationEllipsis({ totalPages, currentPage }: { totalP
                 return (
                     <Link
                         key={`page-${page}`}
-                        href={`/?page=${page}`}
+                        href={createPageUrl(page)}
                         className={`px-4 py-2 rounded transition-colors ${
                             isCurrent
                                 ? "bg-blue-600 text-white font-bold"

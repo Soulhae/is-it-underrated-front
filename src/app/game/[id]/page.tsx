@@ -2,13 +2,19 @@ import supabase from "@/lib/supabase";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 
-export default async function Page({ params, searchParams }: { params: Promise<{ id: string }> | undefined, searchParams: Promise<{ from?: string }> | undefined }) {
+export default async function Page({ params, searchParams }: { params: Promise<{ id: string }> | undefined, searchParams: Promise<{ from?: string; query?: string }> | undefined }) {
     const resolvedParams = await params;
-    const resolvedSearchParams = await searchParams;
-    // console.log("Resolved Params:", resolvedParams);
     const appId = resolvedParams?.id;
-    const currentPage = resolvedSearchParams?.from ? parseInt(resolvedSearchParams.from) : 1;
-    // console.log("Current Page:", currentPage);
+
+    const resolvedSearchParams = await searchParams;
+    const fromPage = resolvedSearchParams?.from ? parseInt(resolvedSearchParams.from) : 1;
+    const previousQuery = resolvedSearchParams?.query || '';
+
+    let backUrl = `/?page=${fromPage}`;
+    if (previousQuery) {
+        // backUrl += `&query=${encodeURIComponent(previousQuery)}`;
+        backUrl += `&query=${previousQuery}`;
+    }
 
     const { data: game, error } = await supabase
         .from("steam_game")
@@ -23,8 +29,8 @@ export default async function Page({ params, searchParams }: { params: Promise<{
     return (
         <main className="min-h-screen p-8 text-slate-200 flex flex-col items-center">
             <div className="w-full max-w-4xl mb-6">
-                <Link href={`/?page=${currentPage}`} className="text-blue-400 hover:text-blue-300 transition-colors">
-                    &larr; Back to Home
+                <Link href={backUrl} className="text-blue-400 hover:text-blue-300 transition-colors">
+                    &larr; Go Back
                 </Link>
             </div>
 
