@@ -17,6 +17,7 @@ export default async function Page({ searchParams }: { searchParams: Promise<{ p
         .from('steam_game')
         .select('*', { count: 'exact' })
         .order('underrated_score', { ascending: false })
+        .order('app_id', { ascending: true })
         .gt('underrated_score', 0)
         .range(offset, offset + itemsPerPage - 1);
 
