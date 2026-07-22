@@ -29,7 +29,7 @@ export default async function Page({ searchParams }: { searchParams: Promise<{ p
     const totalPages = count ? Math.ceil(count / itemsPerPage) : 0;
 
     return (
-        <div className="flex flex-col items-center min-h-screen">
+        <div className="flex flex-col items-center min-h-screen justify-center py-2">
             <nav className="w-full flex justify-end p-2 max-w-[1400px]">
                 <Link 
                     href="/about" 

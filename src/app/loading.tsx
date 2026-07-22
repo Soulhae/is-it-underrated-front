@@ -1,6 +1,6 @@
 export default function Loading() {
     return (
-        <div className="flex flex-col items-center min-h-screen">
+        <div className="flex flex-col items-center min-h-screen justify-center py-2">
             <nav className="w-full flex justify-end p-2 max-w-[1400px]">
                 <div className="px-4 py-2">
                     <div className="w-24 h-6 bg-slate-800 rounded animate-pulse"></div>
