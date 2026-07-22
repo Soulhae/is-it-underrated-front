@@ -1,7 +1,15 @@
 export default function Loading() {
     return (
-        <div className="flex flex-col items-center justify-center min-h-screen py-2">
-            <h1 className="text-2xl font-bold text-white text-center mb-6">Is It Underrated?</h1>
+        <div className="flex flex-col items-center min-h-screen">
+            <nav className="w-full flex justify-end p-2 max-w-[1400px]">
+                <div className="px-4 py-2">
+                    <div className="w-24 h-6 bg-slate-800 rounded animate-pulse"></div>
+                </div>
+            </nav>
+            <div className="flex flex-col items-center w-full mt-4">
+                <h1 className="text-3xl md:text-4xl font-black text-white text-center tracking-tight mb-6">Is It Underrated?</h1>
+            </div>
+            
             
             <div className="w-full max-w-2xl mb-2 px-2">
                 <div className="w-full h-[42px] bg-slate-800 rounded animate-pulse"></div>

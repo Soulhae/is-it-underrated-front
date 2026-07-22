@@ -29,9 +29,21 @@ export default async function Page({ searchParams }: { searchParams: Promise<{ p
     const totalPages = count ? Math.ceil(count / itemsPerPage) : 0;
 
     return (
-        <div className="flex flex-col items-center justify-center min-h-screen py-2">
-            <h1 className="text-2xl font-bold text-white text-center">Is It Underrated?</h1>
-            <SearchBar />
+        <div className="flex flex-col items-center min-h-screen">
+            <nav className="w-full flex justify-end p-2 max-w-[1400px]">
+                <Link 
+                    href="/about" 
+                    className="text-sm font-medium text-slate-400 hover:text-white transition-colors border border-slate-700 hover:border-slate-500 rounded-full px-4 py-2"
+                >
+                    ¿How does it work? &rarr;
+                </Link>
+            </nav>
+            <div className="flex flex-col items-center w-full mt-4">
+                <h1 className="text-3xl md:text-4xl font-black text-white text-center tracking-tight mb-6">
+                    Is It Underrated?
+                </h1>
+                <SearchBar />
+            </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 p-6">
                 {error && <p>Error: {error.message}</p>}
                 {steam_games?.map((game) => {
